@@ -21,5 +21,6 @@ Route::get('/', function () {
 Route::group(['middleware'=>'auth'],function(){
 // Route::get('/', 'HomeController@index')->name('home');
 Route::get('/todo','TodoController@index')->name('todo.index');
+Route::delete('/todo/{id}','TodoController@destroy');
 
 });

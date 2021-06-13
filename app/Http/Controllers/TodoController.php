@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Todo;
+use Illuminate\Support\Facades\Auth;
 class TodoController extends Controller
 {
     /**
@@ -13,10 +14,10 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todo = Todo::where('status', 'todo')->get();
-        $inprogress = Todo::where('status', 'inprogress')->get();
-        $ongoing = Todo::where('status', 'ongoing')->get();
-        $finished = Todo::where('status', 'finished')->get();
+        $todo = Todo::where('status', 'todo')->where('user_id',Auth::user()->id)->get();
+        $inprogress = Todo::where('status', 'inprogress')->where('user_id',Auth::user()->id)->get();
+        $ongoing = Todo::where('status', 'ongoing')->where('user_id',Auth::user()->id)->get();
+        $finished = Todo::where('status', 'finished')->where('user_id',Auth::user()->id)->get();
         // dd($todos);
         return view('item.index', compact('todo','inprogress','ongoing','finished'));
     }
@@ -82,8 +83,8 @@ class TodoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        $deleted = Todo::destroy($id);
+        return redirect('/todo');
     }
 }

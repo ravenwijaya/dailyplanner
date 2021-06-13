@@ -16,7 +16,11 @@
                     <button class="button-next todo"></button>
                     <h4>{{$item->kategori}} <br>Deadline: <span>{{$item->deadline}}</span></h4>
                     <p>{{$item->judul}}</p>
-                    <button class="button-delete"></button>
+                    <form action="/todo/{{$item->id}}" method="post" style="display: inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="button-delete"></button>
+                    </form>
                     <button class="button-edit"></button>
                     <div class="clear"></div>
                 </div>
@@ -33,7 +37,16 @@
                     <h4>{{$item->kategori}} <br>Deadline: <span>{{$item->deadline}}</span></h4>
                     <h4>{{$item->kategori}}</h4>
                     <p>{{$item->judul}}</p>
-                    <button class="button-delete"></button>
+
+                    
+                    <form action="/todo/{{$item->id}}" method="post" style="display: inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="button-delete"></button>
+                    </form>
+                   
+
+                    
                     <button class="button-edit"></button>
                     <div class="clear"></div>
                 </div>
@@ -50,7 +63,11 @@
                     <h4>{{$item->kategori}} <br>Deadline: <span>{{$item->deadline}}</span></h4>
                     <h4>{{$item->kategori}}</h4>
                     <p>{{$item->judul}}</p>
-                    <button class="button-delete"></button>
+                    <form action="/todo/{{$item->id}}" method="post" style="display: inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="button-delete"></button>
+                    </form>
                     <button class="button-edit"></button>
                     <div class="clear"></div>
                 </div>
@@ -67,7 +84,11 @@
                     <h4>{{$item->kategori}} <br>Deadline: <span>{{$item->deadline}}</span></h4>
                     <h4>{{$item->kategori}}</h4>
                     <p>{{$item->judul}}</p>
-                    <button class="button-delete"></button>
+                    <form action="/todo/{{$item->id}}" method="post" style="display: inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="button-delete"></button>
+                    </form>
                     <button class="button-edit"></button>
                     <div class="clear"></div>
                 </div>
