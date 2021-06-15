@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Quicksand', sans-serif;
-    
+
 }
 
 * {
@@ -26,7 +26,7 @@ a {
 header {
     height: 55px;
     width: 100%;
-    background-color: #007bff;
+    background-color: #6c63ff;
     border-bottom: 1px solid #afb9c8;
     font-family: 'Quicksand', sans-serif;
 }
@@ -78,7 +78,7 @@ header {
     padding-bottom: 80px;
     margin-top: 50px;
     /* background-color: black; */
-    
+
     text-align: center;
 }
 
@@ -124,6 +124,7 @@ header {
 
 .todo-box {
     border-top: 5px solid #f4cca4;
+
 }
 
 .inprogress-box {
@@ -145,229 +146,361 @@ header {
     box-shadow: 2px 6px 5px -1px rgba(140, 119, 119, 0.40);
     -webkit-box-shadow: 2px 6px 5px -1px rgba(140, 119, 119, 0.40);
     -moz-box-shadow: 2px 6px 5px -1px rgba(140, 119, 119, 0.40);
-    
+
 }
-.list-box span{
-  color: blue;
+
+.list-box span {
+    color: blue;
 }
-  .clear {
+
+.clear {
     clear: both;
     margin-bottom: 10px;
-  }
-.list-todo{
-  border-left: 5px solid #f4cca4;
 }
-.list-inprogress{
-  border-left: 5px solid #fb9300;
+
+.list-todo {
+    border-left: 5px solid #f4cca4;
 }
-.list-ongoing{
-  border-left: 5px solid #f54748;
+
+.list-inprogress {
+    border-left: 5px solid #fb9300;
 }
-.list-finished{
-  border-left: 5px solid #343f56;
+
+.list-ongoing {
+    border-left: 5px solid #f54748;
+}
+
+.list-finished {
+    border-left: 5px solid #343f56;
 }
 
 .list-box h4 {
     padding-top: 20px;
-    
+
     font-size: small;
     color: dimgray;
 }
-.list-box p{
-  font-weight: bold;
+
+.list-box p {
+    font-weight: bold;
 }
+
 .list-box h4,
 p {
     text-align: left;
 }
 
 .button {
-	border-radius: 50px;
-	background-color: white;
-	float: right;
-  margin-right: 10px;
-  margin-top: 12px;
-	text-align: center;
-	text-decoration: none;
-	font-weight: bold;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 30px;
+    background-color: white;
+    float: right;
+    margin-right: 10px;
+    margin-top: 12px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
 
-	cursor: pointer;
-	transition: all 0.3s;
+    cursor: pointer;
+    transition: all 0.3s;
 }
-.button.todo{
-  border: 3px solid #f4cca4;
-  color: #f4cca4;
+
+.button.todo {
+    border: 3px solid #6c63ff;
+    color: #6c63ff;
 }
+
 .button.todo:hover {
-	border-radius: 50px;
-	background: #f4cca4;
-	color: #fff;
+    border-radius: 50px;
+    background: #6c63ff;
+    color: #fff;
 }
+
 .button.todo:after {
-	content: '\f067';
-	font-family: FontAwesome;
+    content: '\f067';
+    font-family: FontAwesome;
 }
 
 
-.button.inprogress{
-  border: 3px solid #fb9300;
-  color: #fb9300;
+.button.inprogress {
+    border: 3px solid #fb9300;
+    color: #fb9300;
 }
+
 .button.inprogress:hover {
-	border-radius: 50px;
-	background: #fb9300;
-	color: #fff;
+    border-radius: 50px;
+    background: #fb9300;
+    color: #fff;
 }
+
 .button.inprogress:after {
-	content: '\f067';
-	font-family: FontAwesome;
+    content: '\f067';
+    font-family: FontAwesome;
 }
 
-.button.ongoing{
-  border: 3px solid #f54748;
-  color: #f54748;
+.button.ongoing {
+    border: 3px solid #f54748;
+    color: #f54748;
 }
+
 .button.ongoing:hover {
-	border-radius: 50px;
-	background: #f54748;
-	color: #fff;
+    border-radius: 50px;
+    background: #f54748;
+    color: #fff;
 }
+
 .button.ongoing:after {
-	content: '\f067';
-	font-family: FontAwesome;
+    content: '\f067';
+    font-family: FontAwesome;
 }
 
 
-.button.finished{
-  border: 3px solid #343f56;
-  color: #343f56;
+.button.finished {
+    border: 3px solid #343f56;
+    color: #343f56;
 }
+
 .button.finished:hover {
-	border-radius: 50px;
-	background: #343f56;
-	color: #fff;
+    border-radius: 50px;
+    background: #343f56;
+    color: #fff;
 }
+
 .button.finished:after {
-	content: '\f067';
-	font-family: FontAwesome;
+    content: '\f067';
+    font-family: FontAwesome;
 }
-.button-next{
-  /* border-radius: 50px; */
-	background-color: white;
-	text-align: center;
-	text-decoration: none;
-	font-weight: bold;
-	cursor: pointer;
-	transition: all 0.3s;
-  float: right;
-  height: 50px;
-  
+
+.button-next {
+    /* border-radius: 50px; */
+    background-color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    float: right;
+    height: 50px;
+
 }
-.button-next.todo{
-  border: 3px solid #f4cca4;
-  color: #f4cca4;
+
+.button-next.todo {
+    border: 3px solid #f4cca4;
+    color: #f4cca4;
 }
+
 .button-next.todo:hover {
-	background: #f4cca4;
-	color: #fff;
+    background: #f4cca4;
+    color: #fff;
 }
+
 .button-next.todo:after {
-	content: '\f105';
-	font-family: FontAwesome;
+    content: '\f105';
+    font-family: FontAwesome;
 }
 
-.button-next.inprogress{
-  border: 3px solid #fb9300;
-  color: #fb9300;
+.button-next.inprogress {
+    border: 3px solid #fb9300;
+    color: #fb9300;
 }
+
 .button-next.inprogress:hover {
-	background: #fb9300;
-	color: #fff;
+    background: #fb9300;
+    color: #fff;
 }
+
 .button-next.inprogress:after {
-	content: '\f105';
-	font-family: FontAwesome;
+    content: '\f105';
+    font-family: FontAwesome;
 }
 
 
-.button-next.ongoing{
-  border: 3px solid #f54748;
-  color: #f54748;
+.button-next.ongoing {
+    border: 3px solid #f54748;
+    color: #f54748;
 }
+
 .button-next.ongoing:hover {
-	background: #f54748;
-	color: #fff;
-}
-.button-next.ongoing:after {
-	content: '\f105';
-	font-family: FontAwesome;
+    background: #f54748;
+    color: #fff;
 }
 
-.button-next.finished{
-  border: 3px solid #343f56;
-  color: #343f56;
+.button-next.ongoing:after {
+    content: '\f105';
+    font-family: FontAwesome;
 }
+
+.button-next.finished {
+    border: 3px solid #343f56;
+    color: #343f56;
+}
+
 .button-next.finished:hover {
-	background: #343f56;
-	color: #fff;
+    background: #343f56;
+    color: #fff;
 }
+
 .button-next.finished:after {
-	content: '\f105';
-	font-family: FontAwesome;
+    content: '\f105';
+    font-family: FontAwesome;
 }
 
 
 .button-delete {
-  margin-top: -10px;
-	border-radius: 50px;
-	background-color: white;
-	float: left;
-	text-align: center;
-	text-decoration: none;
-	font-weight: bold;
+    margin-top: -10px;
+    border-radius: 50px;
+    background-color: white;
+    float: left;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
 
-	cursor: pointer;
-	transition: all 0.3s;
-  border: 3px solid red;
-  color: red;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 3px solid red;
+    color: red;
 }
 
 .button-delete:hover {
-	border-radius: 50px;
-	background: red;
-	color: #fff;
+    border-radius: 50px;
+    background: red;
+    color: #fff;
 }
+
 .button-delete:after {
-	content: '\f1f8';
-	font-family: FontAwesome;
+    content: '\f1f8';
+    font-family: FontAwesome;
 }
 
 .button-edit {
-  margin-left: 10px;
-  margin-top: -10px;
-	border-radius: 50px;
-	background-color: white;
-	float: left;
-	text-align: center;
-	text-decoration: none;
-	font-weight: bold;
+    margin-left: 10px;
+    margin-top: -10px;
+    border-radius: 50px;
+    background-color: white;
+    float: left;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
 
-	cursor: pointer;
-	transition: all 0.3s;
-  border: 3px solid #185adb;
-  color: #185adb;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 3px solid #185adb;
+    color: #185adb;
 }
 
 .button-edit:hover {
-	border-radius: 50px;
-	background: #185adb;
-	color: #fff;
+    border-radius: 50px;
+    background: #185adb;
+    color: #fff;
 }
+
 .button-edit:after {
-	content: '\f044';
-	font-family: FontAwesome;
+    content: '\f044';
+    font-family: FontAwesome;
 }
+
 /* #welcome{
   background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
   color: white;
 } */
+
+.form-popup {
+    margin: 10px 200px;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, .15);
+ 
+    backdrop-filter: blur(5px);
+
+
+}
+
+.form-title{
+  text-align: center;
+  padding-top: 70px;
+ 
+}
+
+
+.form-container {
+    margin: auto;
+    width: 700px;
+    padding: 10px 0 40px 0;
+
+}
+
+/* Full-width input fields */
+.form-container input[type=text],
+.form-container input[type=password] {
+
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+.form-group{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus,
+.form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+.btn-back {
+  text-align: center;
+  position: fixed;
+  background-color: #f0ad4e;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+ 
+
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+    background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+.open-button:hover,.btn-back {
+    opacity: 1;
+}
+
+div.sticky {
+    position: -webkit-sticky;
+    position: fixed;
+    right: 0;
+
+    bottom: 20;
+    font-size: 100px;
+}
+.deadline{
+  display: inline;
+ 
+}

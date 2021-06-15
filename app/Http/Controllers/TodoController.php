@@ -12,6 +12,7 @@ class TodoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+ 
     public function index()
     {
         $todo = Todo::where('status', 'todo')->where('user_id',Auth::user()->id)->get();
@@ -29,7 +30,15 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        // $users = User::all();
+        // $aa=$users->find(1);
+        //  // $subset = $users->map(function ($user) {
+        //  //     return collect($user->toArray())
+        //  //         ->only(['id', 'name', 'email'])
+        //  //         ->all();
+        //  // });
+        // //dd( $aa);
+         return view('item.form');
     }
 
     /**
@@ -40,7 +49,16 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_todo = Todo::create([
+            "kategori" => $request["kategori"],
+            "judul" => $request["judul"],
+            "isi" => $request["wysiwyg-editor"],
+            "deadline" => $request["deadline"],
+            "status" => $request["status"],
+            "user_id" => $request["user_id"],
+           
+        ]);
+        return redirect('/todo');
     }
 
     /**
@@ -62,7 +80,16 @@ class TodoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $todo = Todo::find($id);
+        return view('item.editform', compact('todo'));
+        
+    }
+    public function changestatus($id,$status){
+        $todo = Todo::where('id',$id)->first();
+        $todo->status = $status;
+//dd($todo);
+        $todo->save();
+        return redirect()->back();
     }
 
     /**
@@ -72,9 +99,18 @@ class TodoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update($id, Request $request) {
+        // dd($request->all());
+        
+        Todo::where('id',$id)
+        ->update([
+            "kategori" => $request["kategori"],
+            "judul" => $request["judul"],
+            "isi" => $request["wysiwyg-editor"],
+            "deadline" => $request["deadline"],
+            "status" => $request["status"],
+        ]);
+        return redirect('/todo');
     }
 
     /**

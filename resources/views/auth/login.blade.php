@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{asset('/loginf7/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('/loginf7/css/style.css')}}">
 
-    <title>Login #7</title>
+    <title>Login</title>
 </head>
 
 <body>
@@ -33,9 +33,9 @@
                                 @csrf
                                 <div class="form-group first">
 
-                                    <label for="email">Email</label>
+                                    
 
-                                    <input id="email" type="email"
+                                    <input id="email" type="email" placeholder="Email" 
                                         class="form-control @error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autocomplete="email">
                                     @error('email')
@@ -45,8 +45,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-group last mb-4">
-                                    <label for="password">Password</label>
-                                    <input id="password" type="password"
+                                  
+                                    <input id="password" type="password" placeholder="Password" 
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="current-password">
 
@@ -60,11 +60,7 @@
                                 <div class="d-flex mb-5 align-items-center">
                                     
                                    
-                                    @if (Route::has('password.request'))
-                                    <a class="ml-auto forgot-pass" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                    @endif
+                                   
 
                                 </div>
 
@@ -73,7 +69,7 @@
                                 </button>
                                 @if (Route::has('register'))
                                 <a class="d-block text-center my-4 text-muted" href="{{ route('register') }}">
-                                    {{ __('Daftar Akun') }}
+                                    {{ __('New to Daily Planner? Create an account') }}
                                 </a>
                                 @endif
 

@@ -21,6 +21,12 @@ Route::get('/', function () {
 Route::group(['middleware'=>'auth'],function(){
 // Route::get('/', 'HomeController@index')->name('home');
 Route::get('/todo','TodoController@index')->name('todo.index');
+Route::get('/todo/create','TodoController@create')->name('todo.create');
+Route::post('/todoc','TodoController@store');
+Route::get('/changestatus/{id}/{status}','TodoController@changestatus');
+Route::get('/todo/{id}/edit','TodoController@edit');
+Route::put('/todo/{id}','TodoController@update');
 Route::delete('/todo/{id}','TodoController@destroy');
+Route::post('ckeditor/upload', 'CKEditorController@upload')->name('ckeditor.image-upload');
 
 });
