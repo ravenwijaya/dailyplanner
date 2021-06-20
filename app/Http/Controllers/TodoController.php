@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Todo;
+use App\Workspace;
+use App\Detail;
+use App\Models\TodoModel;
+
+
 use Illuminate\Support\Facades\Auth;
 class TodoController extends Controller
 {
@@ -13,14 +18,12 @@ class TodoController extends Controller
      * @return \Illuminate\Http\Response
      */
  
-    public function index()
+    public function index($id)
     {
-        $todo = Todo::where('status', 'todo')->where('user_id',Auth::user()->id)->get();
-        $inprogress = Todo::where('status', 'inprogress')->where('user_id',Auth::user()->id)->get();
-        $ongoing = Todo::where('status', 'ongoing')->where('user_id',Auth::user()->id)->get();
-        $finished = Todo::where('status', 'finished')->where('user_id',Auth::user()->id)->get();
-        // dd($todos);
-        return view('item.index', compact('todo','inprogress','ongoing','finished'));
+        $todo = Todo::where('status', 'todo')->where('workspace_id',$id)->get();
+        $inprogress = Todo::where('status', 'inprogress')->where('workspace_id',$id)->get();
+        $done = Todo::where('status', 'done')->where('workspace_id',$id)->get();
+        return view('item.todoindex', compact('todo','inprogress','done','id'));   
     }
 
     /**
@@ -28,17 +31,9 @@ class TodoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        // $users = User::all();
-        // $aa=$users->find(1);
-        //  // $subset = $users->map(function ($user) {
-        //  //     return collect($user->toArray())
-        //  //         ->only(['id', 'name', 'email'])
-        //  //         ->all();
-        //  // });
-        // //dd( $aa);
-         return view('item.form');
+         return view('item.todocreateform',compact('id'));
     }
 
     /**
@@ -47,7 +42,7 @@ class TodoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $new_todo = Todo::create([
             "kategori" => $request["kategori"],
@@ -55,10 +50,10 @@ class TodoController extends Controller
             "isi" => $request["wysiwyg-editor"],
             "deadline" => $request["deadline"],
             "status" => $request["status"],
-            "user_id" => $request["user_id"],
-           
+            "workspace_id" => $id,
         ]);
-        return redirect('/todo');
+        return redirect()->route('todo.index', $id);
+        
     }
 
     /**
@@ -81,13 +76,12 @@ class TodoController extends Controller
     public function edit($id)
     {
         $todo = Todo::find($id);
-        return view('item.editform', compact('todo'));
+        return view('item.todoeditform', compact('todo'));
         
     }
     public function changestatus($id,$status){
         $todo = Todo::where('id',$id)->first();
         $todo->status = $status;
-//dd($todo);
         $todo->save();
         return redirect()->back();
     }
@@ -100,9 +94,7 @@ class TodoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update($id, Request $request) {
-        // dd($request->all());
-        
-        Todo::where('id',$id)
+        $to=Todo::where('id',$id)
         ->update([
             "kategori" => $request["kategori"],
             "judul" => $request["judul"],
@@ -110,7 +102,8 @@ class TodoController extends Controller
             "deadline" => $request["deadline"],
             "status" => $request["status"],
         ]);
-        return redirect('/todo');
+        
+        return redirect()->route('todo.index', $to);
     }
 
     /**
@@ -121,6 +114,7 @@ class TodoController extends Controller
      */
     public function destroy($id) {
         $deleted = Todo::destroy($id);
-        return redirect('/todo');
+        return redirect()->route('todo.index', $deleted);
+        
     }
 }

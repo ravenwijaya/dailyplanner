@@ -29,9 +29,9 @@
                                 <h3>Register</h3>
                                 <p class="mb-4">Welcome to Daily Planner</p>
                             </div>
-                            <form method="POST" action="{{ route('register') }}">
+                            <form method="POST"  action="{{ route('register') }}">
                                 @csrf
-                                <input type="hidden" type="text" id="token" value="" name="token" readonly>
+                                 <input type="hidden" type="text" id="token" value=" {{$token}}" name="token" readonly>
                                 <div class="form-group first">
                                     <!-- <label for="name">{{ __('Name') }}</label> -->
 
@@ -54,7 +54,7 @@
 
                                     <input id="email" type="email"placeholder="Email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email">
+                                        value="{{ $email}}" required autocomplete="email" readonly>
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">

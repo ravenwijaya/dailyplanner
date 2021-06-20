@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Detail;
+use App\Invite;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -63,11 +65,25 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
-        return User::create([
+    {//dd($data['token']);
+        $user=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+       
+        //dd($data);
+        if($data['token']){
+            $invite=Invite::where('token',$data['token'])->first();
+            $deleted = Invite::destroy($invite['id']);
+            $add_new_member = Detail::create([
+                "workspace_id" => $invite["workspace_id"],
+                "user_id" => $user["id"],
+                "status" => "member",
+            ]);
+        }
+        return $user;
     }
+
+  
 }

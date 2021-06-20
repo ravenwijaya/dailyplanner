@@ -69,7 +69,7 @@
                                 </button>
                                 @if (Route::has('register'))
                                 <a class="d-block text-center my-4 text-muted" href="{{ route('register') }}">
-                                    {{ __('New to Daily Planner? Create an account') }}
+                                    New to Daily Planner? <span>Create an account</span>
                                 </a>
                                 @endif
 

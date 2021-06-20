@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\SendReminderEmails;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        SendReminderEmails::class
     ];
 
     /**
@@ -26,6 +27,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command(SendReminderEmails::class)->everyMinute();
+      
+
     }
 
     /**

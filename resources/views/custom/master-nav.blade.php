@@ -4,20 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Planner</title>
-    
+
     <link rel="stylesheet" href="{{asset('/custom//dist/css/stylesheet.css')}}">
     <link rel="stylesheet" href="{{asset('/custom//dist/css/responsive.css')}}">
-    
-    
+
+
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
-      tinymce.init({
-        selector: '#mytextarea'
-      });
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+
     </script>
 
-    
+
 </head>
 
 <body>
@@ -27,6 +28,9 @@
                 <!-- <img class="logo" src="https://prog-8.com/images/html/advanced/main_logo.png"> -->
                 <h3 style="line-height: 20px; color:white;">Daily Planner </h3>
             </div>
+            <a href="/workspace" class="header-workspace">Workspace</a>
+
+            <!-- <a class="header-left">Workspace</a> -->
             <!-- The to do list to organize work & life -->
             <a class="header-right" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i
@@ -38,7 +42,12 @@
 
         </div>
     </header>
+    <!-- <div class="menu">
+               
+            </div> -->
+
     <div class="content">
+
 
         @yield('content')
 
@@ -63,7 +72,7 @@
 
     </script>
 
-<!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+    <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
 <script>
     tinymce.init({
         selector:'textarea.description',
@@ -71,18 +80,20 @@
         height: 300
     });
 </script> -->
-<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.ckeditor').ckeditor();
-    });
-</script>
-<script type="text/javascript">
-    CKEDITOR.replace('wysiwyg-editor', {
-        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-        filebrowserUploadMethod: 'form'
-    });
-</script>
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.ckeditor').ckeditor();
+        });
+
+    </script>
+    <script type="text/javascript">
+        CKEDITOR.replace('wysiwyg-editor', {
+            filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form'
+        });
+
+    </script>
     <script src="https://kit.fontawesome.com/9981c01396.js" crossorigin="anonymous"></script>
 
 </body>
