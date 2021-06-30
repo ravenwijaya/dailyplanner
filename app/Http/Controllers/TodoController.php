@@ -62,10 +62,7 @@ class TodoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -94,7 +91,8 @@ class TodoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update($id, Request $request) {
-        $to=Todo::where('id',$id)
+        //dd($request);
+        $to=Todo::where('id',$request->id)
         ->update([
             "kategori" => $request["kategori"],
             "judul" => $request["judul"],
@@ -103,7 +101,7 @@ class TodoController extends Controller
             "status" => $request["status"],
         ]);
         
-        return redirect()->route('todo.index', $to);
+        return redirect()->route('todo.index', $id);
     }
 
     /**
@@ -117,4 +115,9 @@ class TodoController extends Controller
         return redirect()->route('todo.index', $deleted);
         
     }
+    // 	$workspaces = DB::table('details')
+    //     ->select('details.*', 'workspaces.nama as workspace_nama', 'workspaces.id as workspace_id')
+    //     ->join('workspaces', 'details.workspace_id', '=', 'workspaces.id')
+    //     ->where('user_id',Auth::user()->id)
+    //     ->get();
 }

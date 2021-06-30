@@ -12,6 +12,7 @@
                 <div class="list-box list-todo">
                   <a href="/todo/{{ $item->workspace_id }}"><h2 class="workspace-title">{{$item->workspace_nama}}</h2></a> 
                     <p class="workspace-status">{{$item->status}}</p>
+                  
                     @if ($item->status=="admin")
                     <div class="workspace-but">
                     <form action="/workspace/{{$item->workspace_id}}" method="post" style="display: inline">
@@ -21,6 +22,9 @@
                     </form>
                     <a href="/workspace/{{$item->workspace_id}}/edit" ><button class="button-edit workspace"></button></a>
                     </div>
+                    @else
+                    <a href="/workspace/{{$item->workspace_id}}/view" ><button class="button-edit workspace"></button></a>
+                   
                     @endif
                     <div class="clear"></div>
                 </div>

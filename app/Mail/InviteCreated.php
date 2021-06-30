@@ -29,6 +29,7 @@ class InviteCreated extends Mailable
      */
     public function build()
     {
-        return redirect('/workspace');
+        // return $this->from('you@example.com')
+                return redirect('/workspace');
     }
 }

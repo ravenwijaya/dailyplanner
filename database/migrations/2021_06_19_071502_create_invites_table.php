@@ -17,7 +17,6 @@ class CreateInvitesTable extends Migration
             $table->bigIncrements('id');
             $table->string('email');
             $table->unsignedBigInteger('workspace_id');
-            $table->string('token', 16)->unique();
             $table->foreign('workspace_id')->references('id')->on('workspaces')->onDelete('cascade');
             $table->timestamps();
         });

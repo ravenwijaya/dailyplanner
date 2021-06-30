@@ -53,53 +53,52 @@ class WorkspaceController extends Controller
      */
     public function store(Request $request)
     {
-        
-        //WORKSPACE
-        $new_workspace = Workspace::create([
-            "nama" => $request["nama"],
-        ]);
-        //DETAILS
-        $new_workspace_detail = Detail::create([
-            "workspace_id" => $new_workspace["id"],
-            "user_id" => Auth::user()->id,
-            "status" => "admin",
-        ]);
-
-        if($request->email){
-            $emailArr = explode(',', $request->email);
-            $emailMulti  = [];
-            foreach($emailArr as $strEmail){
-                $user = User::where('email', $strEmail)->first();
-                if($user){
-                    $add_new_member = Detail::create([
-                    "workspace_id" => $new_workspace["id"],
-                    "user_id" => $user["id"],
-                    "status" => "member",
-                ]);
-                }else{
+            $new_workspace = Workspace::create([
+                "nama" => $request["nama"],
+            ]);
+            //DETAILS
+            $new_workspace_detail = Detail::create([
+                "workspace_id" => $new_workspace["id"],
+                "user_id" => Auth::user()->id,
+                "status" => "admin",
+            ]);
     
-                    do {
-                        $token = Str::random(16);;
-                    } 
-                    while (Invite::where('token', $token)->first());
+            if($request->email){
+                $emailArr = explode(',', $request->email);
+                //dd($emailArr);
+                $emailMulti  = [];
+                foreach($emailArr as $strEmail){
                     
-                    $invite = Invite::create([
-                        'email' => $strEmail,
+                    $user = User::where('email', $strEmail)->first();
+                    if($user){
+                        $add_new_member = Detail::create([
                         "workspace_id" => $new_workspace["id"],
-                        'token' => $token
+                        "user_id" => $user["id"],
+                        "status" => "member",
                     ]);
-                    // send the email
-                    $email = $request->get('email');
-                    $link ='http://127.0.0.1:8000/invite/'.$token ;
+                    }else{
         
-                    Mail::send('item.invite', ['email' => $email,'link' => $link ], function ($message) use ($email)
-                    {
-                        $message->from('dailyplannerku@gmail.com', 'dailyplannerku');
-                        $message->to($email);
-                    });
+                        $invite = Invite::create([
+                            'email' => $strEmail,
+                            "workspace_id" => $new_workspace["id"],
+                        
+                        ]);
+                       
+                        // send the email
+                        
+                        $email = $strEmail;
+                        $link ='http://127.0.0.1:8000/invite/'.$invite["id"] ;
+            
+                        Mail::send('item.invite', ['email' => $email,'link' => $link ], function ($message) use ($email)
+                        {
+                            $message->from('dailyplannerku@gmail.com', 'dailyplannerku');
+                            $message->to($email);
+                        });
+                    }
                 }
             }
-        }
+        
+       
        
         return redirect('/workspace');
     }
@@ -112,7 +111,6 @@ class WorkspaceController extends Controller
      */
     public function show($id)
     {
-        
     }
 
     /**
@@ -122,10 +120,22 @@ class WorkspaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   $member = Workspace::get_by_id($id);
+    {   
+        $member = Workspace::get_by_id($id);
+       // dd($member);
+       $admin = $member->first(function($item) {
+        return $item->id == Auth::user()->id;
+    });
+    
+        $workspace = Workspace::find($id);
+       
+        return view('item.workspaceeditform', compact('workspace','member','admin'));
+    }
+    public function view($id){
+        $member = Workspace::get_by_id($id);
         $workspace = Workspace::find($id);
         //dd($workspace);
-        return view('item.workspaceeditform', compact('workspace','member'));
+        return view('item.workspaceviewform', compact('workspace','member'));
     }
 
     /**
@@ -158,9 +168,20 @@ class WorkspaceController extends Controller
         $deleted = Detail::where('workspace_id', $workspaceid)->where('user_id',$memberid)->delete();
         return redirect()->route('workspace.edit', $workspaceid);
     }
+    public function memberadmin($workspaceid, $memberid)
+    {   
+        Detail::where('workspace_id',$workspaceid)->where('status','admin')
+        ->update([
+            "status" => "member",
+        ]);
+        Detail::where('workspace_id',$workspaceid)->where('user_id',$memberid)
+        ->update([
+            "status" => "admin",
+        ]);
+       
+        return redirect()->route('workspace.index');
+    }
     public function invite(Request $request){
-        //dd($request);
-        
         $workspaceid=$request->id;
         
         if($request->email){
@@ -183,19 +204,16 @@ class WorkspaceController extends Controller
                 }else{
                     $inviteexist = Invite::where('workspace_id',$workspaceid)->where('email',$strEmail)->first();
                     if(!$inviteexist){
-                        do {
-                            $token = Str::random(16);;
-                        } 
-                        while (Invite::where('token', $token)->first());
-                        
+             
                         $invite = Invite::create([
                             'email' => $strEmail,
                             "workspace_id" => $workspaceid,
-                            'token' => $token
+                         
                         ]);
+                     
                         // send the email
-                        $email = $request->get('email');
-                        $link ='http://127.0.0.1:8000/invite/'.$token ;
+                        $email = $strEmail;
+                        $link ='http://127.0.0.1:8000/invite/'.$invite["id"] ;
             
                         Mail::send('item.invite', ['email' => $email,'link' => $link ], function ($message) use ($email)
                         {
@@ -219,5 +237,50 @@ class WorkspaceController extends Controller
         return redirect()->route('workspace.edit', $request['id']);
     }
     
+
+
+
+    // public function index()
+	// {
+	// 	$workspaces = DB::table('details')
+    //     ->select('details.*', 'workspaces.nama as workspace_nama', 'workspaces.id as workspace_id')
+    //     ->join('workspaces', 'details.workspace_id', '=', 'workspaces.id')
+    //     ->where('user_id',Auth::user()->id)
+    //     ->get();
+ 
+	// }
+    // public function store(Request $request)
+	// {
+	// 	// insert data ke table pegawai
+	// 	DB::table('pegawai')->insert([
+	// 		'pegawai_nama' => $request->nama,
+	// 		'pegawai_jabatan' => $request->jabatan,
+	// 		'pegawai_umur' => $request->umur,
+	// 		'pegawai_alamat' => $request->alamat
+	// 	]);
+	// 	// alihkan halaman ke halaman pegawai
+	// 	return redirect('/pegawai');
+ 
+	// }
+    // public function update(Request $request)
+	// {
+	// 	// update data pegawai
+	// 	DB::table('pegawai')->where('pegawai_id',$request->id)->update([
+	// 		'pegawai_nama' => $request->nama,
+	// 		'pegawai_jabatan' => $request->jabatan,
+	// 		'pegawai_umur' => $request->umur,
+	// 		'pegawai_alamat' => $request->alamat
+	// 	]);
+	// 	// alihkan halaman ke halaman pegawai
+	// 	return redirect('/pegawai');
+	// }
+    // public function hapus($id)
+	// {
+	// 	// menghapus data pegawai berdasarkan id yang dipilih
+	// 	DB::table('pegawai')->where('pegawai_id',$id)->delete();
+		
+	// 	// alihkan halaman ke halaman pegawai
+	// 	return redirect('/pegawai');
+	// }
 }
 

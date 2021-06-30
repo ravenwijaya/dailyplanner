@@ -5,13 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 class TodoModel {
 
-    public static function get_all(){
-        $workspaces = DB::table('details')
-        ->select('details.*', 'workspaces.nama as workspace_nama', 'workspaces.id as workspaces_id')
-        ->join('workspaces', 'details.id', '=', 'workspaces.id')
-        ->get();
-        return $workspaces;
-      }
+    
 
 //   public static function save($data){
 //       $new_tanya=DB::table('tanya')->insert($data);

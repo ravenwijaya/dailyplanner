@@ -31,11 +31,9 @@
                             </div>
                             <form method="POST"  action="{{ route('register') }}">
                                 @csrf
-                                 <input type="hidden" type="text" id="token" value=" {{$token}}" name="token" readonly>
+                                 <input type="hidden" type="text" id="inviteid" value=" {{$id}}" name="inviteid" readonly>
                                 <div class="form-group first">
-                                    <!-- <label for="name">{{ __('Name') }}</label> -->
-
-                                    
+                  
                                         <input id="name" type="text" placeholder="Name"
                                             class="form-control @error('name') is-invalid @enderror" name="name"
                                             value="{{ old('name') }}" required autocomplete="name" autofocus>

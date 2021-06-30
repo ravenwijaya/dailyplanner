@@ -72,9 +72,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
        
-        //dd($data);
-        if($data['token']){
-            $invite=Invite::where('token',$data['token'])->first();
+        
+        if($data['inviteid']){
+            $invite=Invite::where('id',$data['inviteid'])->first();
             $deleted = Invite::destroy($invite['id']);
             $add_new_member = Detail::create([
                 "workspace_id" => $invite["workspace_id"],

@@ -7,12 +7,12 @@ use App\Invite;
 class InviteController extends Controller
 {
 
-    public function invite($token)
+    public function invite($id)
 {  
-    $invite = Invite::where('token', $token)->first();
-
+    $invite = Invite::where('id', $id)->first();
+    $id=$invite["id"];
     $email=$invite['email'];
-    return view('item.register',compact('token','email'));
+    return view('item.register',compact('id','email'));
 }
 public function process()
 {

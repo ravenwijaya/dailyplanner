@@ -32,6 +32,7 @@
 
             <!-- <a class="header-left">Workspace</a> -->
             <!-- The to do list to organize work & life -->
+           <a class="header-name"> {{ Auth::check() ? Auth::user()->name : '' }}</a>
             <a class="header-right" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i
                     class="fas fa-sign-out-alt"></i>Logout</a>

@@ -16,6 +16,7 @@
         </form>
         <div style="margin-bottom:30px;">
             <label>Member:<br></label>
+
             @foreach($member as $key => $item)
             <div id="member">
                 @if ($item->status == 'admin')
@@ -24,13 +25,14 @@
                 </span>
                 @else
                 <span class="badge badge-success">{{ $item->name}}
-                    <form action="/member/admin?id={{$workspace->id}}&memberid={{$item->id}}" method="post"
+                    <form action="/member/admin/{{$workspace->id}}/{{$item->id}}" method="post"
                         style="display: inline">
                         @csrf
                         @method('PUT')
 
                         <button type="submit" class="button-king workspace"></button>
                     </form>
+
                     <form action="/member/delete/{{$workspace->id}}/{{$item->id}}" method="post"
                         style="display: inline">
                         @csrf
@@ -46,6 +48,7 @@
             </div>
 
             @endforeach
+
             <form action="/workspace/invite" method="POST" style="display: inline">
                 @csrf
                 @method('PUT')

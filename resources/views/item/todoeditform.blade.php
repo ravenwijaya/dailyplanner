@@ -6,7 +6,7 @@
     <a href="/todo/{{$todo->workspace_id}}"class="btn-back">Back</a>
     <h1 class="form-title">Edit Todo</h1>
     <!-- <a href="{{ url()->previous() }}">Back</a> -->
-    <form role="form" action="/todo/{{$todo->id}}" method="POST" class="form-container">
+    <form role="form" action="/todo/{{$todo->workspace_id}}" method="POST" class="form-container">
 
         @csrf
         @method('PUT')
@@ -16,7 +16,7 @@
         <input type="text" placeholder="Enter Title" value="{{$todo->judul}}" name="judul" required>
         <label for="status">Status:</label>
         <?php
-				$options = array("Todo", "Inprogress", "Ongoing","Done");
+				$options = array("Todo", "Inprogress", "Done");
 				echo "<select name='status' id='status'>";
 				foreach ($options as $option) {
 

@@ -23,6 +23,7 @@ class Workspace extends Model
         ->join('workspaces', 'details.workspace_id', '=', 'workspaces.id')
         ->join('users', 'details.user_id', '=', 'users.id')
         ->where('details.workspace_id',$id)
+        ->orderBy('details.created_at', 'asc')
         ->get();
      // dd($member);
         return $member;

@@ -5,8 +5,9 @@
 </head>
 
 <body style="text-align: center;">
-    <h1>Workspace Invitation</h1>
-    <p>Hello - {{$email}}</p>
+<h1>Daily Planner</h1>
+    <p>Workspace Invitation</p>
+    <p>Hey there! {{Auth::user()->name}} has invited you to their Workspace on Daily Planner</p>
     <a style="background-color: lightgreen;
 font-size: 30px;
   color: white;

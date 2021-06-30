@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('invite/{token}', 'InviteController@invite');
+Route::get('invite/{email}', 'InviteController@invite');
 Route::post('/register/{token}', [
     'as' => '',
     'uses' => 'Auth\RegisterController@register'
@@ -30,13 +30,15 @@ Route::get('/workspace/create','WorkspaceController@create');
 Route::post('/workspace/create','WorkspaceController@store');
 Route::delete('/workspace/{id}','WorkspaceController@destroy');
 Route::get('/workspace/{id}/edit','WorkspaceController@edit')->name('workspace.edit');
+Route::get('/workspace/{id}/view','WorkspaceController@view')->name('workspace.view');
+Route::put('/member/admin/{id}/{memberid}','WorkspaceController@memberadmin');
 Route::delete('/member/delete/{id}/{memberid}','WorkspaceController@memberdelete');
 Route::put('/workspace/invite','WorkspaceController@invite');
 Route::put('/workspace/name','WorkspaceController@changename');
 
 //TODO
 Route::get('/todo/{id}','TodoController@index')->name('todo.index');
-Route::get('/todo/{id}/create','TodoController@create');
+Route::post('/todo/{id}/create','TodoController@create');
 Route::post('/todo/{id}','TodoController@store');
 Route::get('/todo/{id}/edit','TodoController@edit');
 Route::put('/todo/{id}','TodoController@update');

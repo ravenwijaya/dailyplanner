@@ -31,7 +31,7 @@
                             </div>
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
-                                <input type="hidden" type="text" id="token" value="" name="token" readonly>
+                                <input type="hidden" type="text" id="inviteid" value="" name="inviteid" readonly>
                                 <div class="form-group first">
                                     <!-- <label for="name">{{ __('Name') }}</label> -->
 

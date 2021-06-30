@@ -46,17 +46,19 @@ class SendReminderEmails extends Command
         ->join('details', 'details.workspace_id', '=', 'todos.workspace_id')
         ->join('users', 'details.user_id', '=', 'users.id')
         ->where('todos.deadline',now()->format('Y-m-d'))
-        ->where('todos.status','todo')->orWhere('todos.status','inprogress')
+        ->whereIn('todos.status', ['todo','inprogress'])
+      
         ->get();
+        
         //dd($reminders);
         $data=[];
         foreach($reminders as $reminder){
             $data[$reminder->user_id][]=(array) $reminder;
         }
-       // dd($data);
+        //dd(now()->format('Y-m-d'));
         foreach($data as $userId => $reminders){
             // foreach($reminders as $reminder){
-            //     dd($reminder['judul']);
+            //     dd($reminder['deadline']);
             // }
             $this->sendEmailToUser($userId,$reminders);
 
